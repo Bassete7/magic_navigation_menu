@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic navigation menu</title>
+</head>
+
+<style>
+    *,::before,::after{
+        padding: 0;
+        margin: 0;
+        box-sizing: inherit;
+    }
+    html{
+        font-size: 62.5%;
+        box-sizing: border-box;
+    }
+    body{
+        background-color: #150d0f;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: monospace, Arial, Helvetica, sans-serif;
+    }
+
+    ion-icon{
+        font-size: 2rem;
+        transform: translateY(.7rem);
+        transition: all .5s ease;
+    }
+    .container{
+        position: relative;
+    }
+    .menu{
+        width: 40rem;
+        height: 7rem;
+        border-radius: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        list-style: none;
+        font-size: 1.7rem;
+        padding-inline: 2rem;
+    }
+    .menu li{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 7.5rem;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+    }
+    .menu li.active ion-icon{
+        transform: translateY(-2.5rem);
+    }
+    .menu li span{
+        transition: all .4s .2s ease;
+        opacity: 0;
+    }
+    .menu li.active span{
+        opacity: 1;
+        transition-delay: 0;
+    }
+    .container .navigator{
+        width: 7rem;
+        height: 7rem;
+        background-color: #2c8900;
+        border-radius: 50%;
+        position: absolute;
+        left: 2rem;
+        top: -3.5rem;
+        border: .6rem solid #150d0f;
+        transition: all .4s ease;
+    }
+    .container .navigator::before{
+        content: '';
+        position: absolute;
+        top: 2.9rem;
+        left: -2.3rem;
+        box-shadow: 2px -5px 0px #150d0f;
+        width: 2rem;
+        height: 2rem;
+        background: transparent;
+        border-top-right-radius: 1.5rem;
+        border-top-left-radius: 2px;
+    }
+    .container .navigator::after{
+        content: '';
+        position: absolute;
+        right: -3.3rem;
+        top: 2.9rem;
+        width: 3rem;
+        height: 1.5rem;
+        background-color: transparent;
+        box-shadow: -2px -4px 0 #150d0f; 
+        border-top-left-radius: 1.5rem;
+    }
+
+    .container li:nth-child(2).active ~ .navigator{
+        transform: translateX(7rem);
+    }
+    .container li:nth-child(3).active ~ .navigator{
+        transform: translateX(14.3rem);
+    }
+    .container li:nth-child(4).active ~ .navigator{
+        transform: translateX(21.5rem);
+    }
+    .container li:nth-child(5).active ~ .navigator{
+        transform: translateX(28.8rem);
+    }
+
+</style>
+
+<body>
+    <div class="container">
+        
+        <ul class="menu">
+            <li class="list active">
+                <ion-icon name="home-outline"></ion-icon>
+                <span>Home</span>
+            </li>
+            <li class="list">
+                <ion-icon name="person-outline"></ion-icon>
+                <span>User</span>
+            </li>
+            <li class="list">
+                <ion-icon name="chatbubble-outline"></ion-icon>
+                <span>Messages</span>
+            </li>
+            <li class="list">
+                <ion-icon name="camera-outline"></ion-icon>
+                <span>Photos</span>
+            </li>
+            <li class="list">
+                <ion-icon name="settings-outline"></ion-icon>
+                <span>Settings</span>
+            </li>
+
+            <div class="navigator"></div>
+        </ul>
+        
+    </div>
+
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+    <script>
+        let btns = document.querySelectorAll('.list');
+        
+        function removeActive(){
+            btns.forEach(btn =>{
+                btn.classList.remove('active');
+            })
+        }
+
+        btns.forEach(btn =>{
+            btn.addEventListener('click', ()=>{
+                removeActive();
+                btn.classList.add('active');
+            })
+        })
+    
+    </script>
+
+</body>
+</html>
